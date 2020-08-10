@@ -13,9 +13,9 @@ spring:
       show-sql: true
   datasource:
     #    URL of the Postgres DB. It can be a remote DB as well
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password: Wasspord
+    url: jdbc:postgresql://${DB_HOST}:5432/postgres
+    username: ${DB_USER}
+    password: ${DB_PASS}
     platform: postgres
     #    Made for sample purposes
     initialization-mode: always
