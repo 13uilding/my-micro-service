@@ -1,0 +1,27 @@
+server:
+  port: 8068
+spring:
+  application:
+    name: monolith
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      #      Hibernate auto creation of the tables from the entity objets
+      ddl-auto: none
+      show-sql: true
+  datasource:
+    #    URL of the Postgres DB. It can be a remote DB as well
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: Wasspord
+    platform: postgres
+    #    Made for sample purposes
+    initialization-mode: always
+#    #    Marks the initialization as true
+#    initialize: true
+#    #    The schema path that needs to be initialized. MIGHT NEED TO CHANGE THIS
+#    schema: classpath:/schema.sql
+#    #    Continues on error
+    continue-on-error: true
