@@ -25,4 +25,5 @@ public class AnswerModel {
 
     @Column(name = "post_date", nullable = false)
     private LocalDate date;
+
 }

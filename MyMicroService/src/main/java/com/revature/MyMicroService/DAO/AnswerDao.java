@@ -13,4 +13,10 @@ public interface AnswerDao extends JpaRepository<AnswerModel, Integer> {
 
     @Query(nativeQuery = true, value = "select * from msa_example.answers a where a.post_date >= :date")
     Optional<List<AnswerModel>> findAllAfterDate(@Param("date") LocalDate date);
+
+    @Query(nativeQuery = true, value = "select * from msa_example.answers a where a.post_date <= :date")
+    Optional<List<AnswerModel>> findAllBeforeDate(@Param("date") LocalDate date);
+
+    @Query(nativeQuery = true, value = "select * from msa_example.answers a where a.post_date >= :startDate and a.post_date <= :endDate")
+    Optional<List<AnswerModel>> findAllBetweenDates(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 }
