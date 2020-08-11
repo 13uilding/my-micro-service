@@ -86,4 +86,14 @@ public class AnswerController {
         return ResponseEntity.badRequest().build();
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<AnswerModel> delete(@PathVariable("id") int id) {
+        Optional<AnswerModel> optional = answerDao.findById(id);
+        if (optional.isPresent()) {
+            answerDao.delete(optional.get());
+            return ResponseEntity.accepted().body(optional.get());
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 }

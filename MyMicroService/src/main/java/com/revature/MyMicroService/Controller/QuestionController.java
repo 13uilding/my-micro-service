@@ -43,13 +43,23 @@ public ResponseEntity<List<QuestionModel>> findAll() {
         return ResponseEntity.status(201).body(question);
     }
 
-/*
-    @GetMapping("/question/{id}/answers")
-    public ResponseEntity<List<Answer>> getAnswersByQuestionId(@PathVariable("id") int id) {
-        // First find the question
-        // Then find the answers corresponding to that question
+    @DeleteMapping("/{id}")
+    public ResponseEntity<QuestionModel> delete(@PathVariable("id") int id) {
+
+        Optional<QuestionModel> optional = questionDao.findById(id);
+        if (optional.isPresent()) {
+            questionDao.delete(optional.get());
+            return ResponseEntity.accepted().body(optional.get());
+        }
+
+        return ResponseEntity.notFound().build();
     }
 
-    Tying date into this later might be a bit difficult.
-     */
+
+//    @GetMapping("/question/{id}/answers")
+//    public ResponseEntity<List<Answer>> getAnswersByQuestionId(@PathVariable("id") int id) {
+//        // First find the question
+//        // Then find the answers corresponding to that question
+//    }
+
 }
