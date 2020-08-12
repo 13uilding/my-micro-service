@@ -1,7 +1,9 @@
 package com.revature.MyMicroService.Controller;
 
 import com.revature.MyMicroService.DAO.QuestionDao;
+import com.revature.MyMicroService.Model.AnswerModel;
 import com.revature.MyMicroService.Model.QuestionModel;
+import com.revature.MyMicroService.Service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,9 @@ public class QuestionController {
 
      @Autowired
      private QuestionDao questionDao;
+
+     @Autowired
+     private AnswerService answerService;
 
     @GetMapping
 public ResponseEntity<List<QuestionModel>> findAll() {
@@ -56,10 +61,14 @@ public ResponseEntity<List<QuestionModel>> findAll() {
     }
 
 
-//    @GetMapping("/question/{id}/answers")
-//    public ResponseEntity<List<Answer>> getAnswersByQuestionId(@PathVariable("id") int id) {
-//        // First find the question
-//        // Then find the answers corresponding to that question
-//    }
+    @GetMapping("/{id}/answers")
+    public ResponseEntity<List<AnswerModel>> getAnswersByQuestionId(@PathVariable("id") int id) {
+        Optional<QuestionModel> optional = questionDao.findById(id);
+        if (optional.isPresent()) {
+            Optional<List<AnswerModel>> optionalList = answerService.getAnswersByQuestionId(optional.get().getId());
+            return optionalList.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.noContent().build());
+        }
+        return ResponseEntity.notFound().build();
+    }
 
 }
