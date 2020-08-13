@@ -3,3 +3,27 @@ server:
 spring:
   application:
     name: answer
+  datasource:
+    #    URL of the Postgres DB. It can be a remote DB as well
+    url: jdbc:postgresql://${DB_HOST}:5432/postgres
+    username: ${DB_USER}
+    password: ${DB_PASS}
+    platform: postgres
+    #    Made for sample purposes
+    initialization-mode: always
+    #    Marks the initialization as true
+#      initialize: true
+#      #    The schema path that needs to be initialized. MIGHT NEED TO CHANGE THIS
+#      schema: classpath:/schema.sql
+    #    Continues on error
+    continue-on-error: true
+  jpa:
+    show-sql: true
+    database: postgresql
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        temp.use_jdbc_metadata_defaults: false
+    hibernate:
+      #      Hibernate auto creation of the tables from the entity objets
+      ddl-auto: none
