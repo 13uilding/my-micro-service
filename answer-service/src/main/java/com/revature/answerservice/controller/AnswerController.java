@@ -84,13 +84,13 @@ public class AnswerController {
 //     DIRTY QUESTION MAPPING
     @PostMapping
     public ResponseEntity<AnswerModel> insert(@RequestBody AnswerControllerModel answer) {
-        int id = answer.getId();
-        if (id != 0) return ResponseEntity.badRequest().build();
         // Gonna need to split here
         int questionId = answer.getQuestion_id();
-        // This potentially creates a new question without
+    // This potentially creates a new question without
+    System.out.println("Here is the question id " + questionId);
         answer.setQuestion(questionClient.getQuestionById(questionId));
         if (answer.getQuestion().getId() != 0) {
+      System.out.println("inside the if");
             AnswerModel answerSaved = answer.makeIntoAnswerModel();
             answerDao.save(answerSaved);
             return ResponseEntity.status(201).body(answerSaved);
