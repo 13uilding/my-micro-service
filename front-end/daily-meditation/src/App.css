@@ -1,0 +1,43 @@
+.container {
+  background-image: url("/imgs/milky-way.jpg");
+  height: 100%;
+  min-height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.myNavContainer {
+  padding: 0px 5px 5px 5px;
+  overflow: hidden;
+}
+
+.myFlexContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.myFlexContainer .myStarLightBlue {
+  color: '#9adcfb';
+}
+
+.minWidth50 {
+  min-width: 50px;
+}
+
+.everythingOnOneLine {
+  white-space: nowrap;
+}
+
+.everythingOnOneLine * {
+  display: inline;
+}
+
+.myPage {
+  overflow-y: scroll;
+  margin: 0 auto;
+  
+  width: 80%;
+  height: 100vh;
+}
