@@ -32,7 +32,12 @@ const theme = createMuiTheme({
       paper: {
         height: 'auto',
       }
-    }
+    },
+    // MuiCollapse: {
+    //   wrapper: {
+    //     width: '100%'
+    //   }
+    // }
   }
 
 })

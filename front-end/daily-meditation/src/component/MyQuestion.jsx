@@ -12,7 +12,7 @@ const useStyles = makeStyles({
     minWidth: 275,
     backgroundColor: '#303030',
     opacity: 0.95,
-    margin: '20px 10px 0 10px',
+    margin: '10px 10px 10px 10px',
   },
   title: {
     // Play with this size

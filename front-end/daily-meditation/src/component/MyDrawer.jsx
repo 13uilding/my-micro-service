@@ -71,8 +71,8 @@ export default function MyDrawer() {
     >
       <List>
         {['Routines', 'Answers'].map((text, index) => (
-          <Link component={RouterLink} to={text.toLowerCase()}>
-            <ListItem button key={text} className={clsx(classes.listItem)} onClick={(e)=>console.log(e.target)}>
+          <Link key={text} component={RouterLink} to={text.toLowerCase()}>
+            <ListItem button  className={clsx(classes.listItem)}>
               <ListItemIcon>{index % 2 === 0 ? <ChildCareIcon /> : <CommentIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
@@ -82,7 +82,7 @@ export default function MyDrawer() {
       <Divider  className={clsx(classes.lineColor)} />
       <List>
         {['In Progress'].map((text, index) => (
-          <Link component={RouterLink} to={text.toLowerCase().split(" ").join("-")}>
+          <Link key={text} component={RouterLink} to={text.toLowerCase().split(" ").join("-")}>
             <ListItem button key={text} className={clsx(classes.listItem)} >
                 <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                 <ListItemText primary={text} />
@@ -113,7 +113,6 @@ export default function MyDrawer() {
           anchor={"top"} 
           open={state["top"]} 
           onClose={toggleDrawer("top", false)}
-          elevation='16'
           className={clsx(classes.drawerModifications)}
         >
           {list("top")}
