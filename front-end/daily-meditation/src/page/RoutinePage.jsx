@@ -4,6 +4,7 @@ import MyQuestion from '../component/MyQuestion';
 import { makeStyles, Typography } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
 import MyRoutine from '../component/MyRoutine';
+import { getAllRoutines } from '../api/routine';
 
 const useStyles = makeStyles({
   root: {
@@ -17,28 +18,44 @@ const useStyles = makeStyles({
 
 export default function RoutinePage() {
   const classes = useStyles();
-  const [questions, setQuestions] = useState([]);
+  // const [questions, setQuestions] = useState([]);
+  const [routines, setRoutines] = useState([]);
   useEffect( () => {
     try {
-      console.log("Attempting to get questions")
-      getQuestions();
+      // console.log("Attempting to get questions")
+      // getQuestions();
+      console.log("Attempting to get routines")
+      getRoutines();
     } catch(e) {
       console.error(e);
     }
   }, []);  
 
-  const getQuestions = async () => {
-    let questions = await getAllQuestions();
-    setQuestions(questions);
+  // const getQuestions = async () => {
+  //   let questions = await getAllQuestions();
+  //   setQuestions(questions);
+  // }
+
+  const getRoutines = async () => {
+    let routines = await getAllRoutines();
+    setRoutines(routines);
   }
 
   return (
     // Adjust the scroll bar later
     <div className="myPage" id="routinePage">
       <Grid container alignContent='center' justify='flex-end' className={classes.root} wrap='wrap'>
-        <MyRoutine routineName='Morning' routineid={1} questions={questions.filter((question) => question.id <= 5)}></MyRoutine>
-        <MyRoutine routineName='Evening' routineid={2} questions={questions.filter((question) => question.id > 5 && question.id < 11)}></MyRoutine>
-        <MyRoutine routineName='Night' routineid={3} questions={questions.filter((question) => question.id > 13)}></MyRoutine>
+
+        {routines.map(routine => {
+          return (
+            <MyRoutine 
+              routineName={routine.name} 
+              routineid={routine.id} 
+              questions={routine.questions}
+            >
+            </MyRoutine>
+          )
+        })}
       </Grid>
     </div>
   )

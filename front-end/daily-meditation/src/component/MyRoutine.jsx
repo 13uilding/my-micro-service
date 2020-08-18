@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Grid, Typography, makeStyles, Divider, Collapse, Button, ButtonBase } from '@material-ui/core';
 import MyQuestion from './MyQuestion';
 import clsx from 'clsx';
+import MyButtonGroup from './MyButtonGroup';
 
 const useStyles = makeStyles({
   lineColor: {
@@ -18,14 +19,38 @@ const useStyles = makeStyles({
   },
   buttonStyle: {
     marginBottom: 20
+  },
+  fullSizeQuestion: {
+    height: '100%'
   }
 })
 export default function MyRoutine(props) {
   const classes = useStyles();
 
   const [state, setState] = useState({
-    showRoutine: false
+    showRoutine: false,
+
   })
+
+  const handleRoutineButtonClick = (routineId, selectedIndex) => {
+    console.log("The routine clicked was " + routineId + " and the selected index " + selectedIndex);
+    // Put this in a utility?
+    switch(selectedIndex) {
+      case 0:
+        // send to the inprogress page
+        console.log("do");
+        break;
+      case 1:
+        // Should only be able to modify your own routines
+        console.log("modify");
+        break;
+      case 2:
+        // removes from your list of routines
+        // if it is your routine maybe you can delete? Idk
+        console.log("remove")
+        break;
+    }
+  }
 
   const toggleRoutine = (e) => {
     console.log(e.target);
@@ -62,13 +87,14 @@ export default function MyRoutine(props) {
           <Grid item container alignContent='center' justify='flex-start' wrap='wrap' xs={12}>
             {props.questions.map(question => {
               return (
-                <Grid item xs={6} key={question.id}>
-                  <MyQuestion question={question.question} questionId={question.id}></MyQuestion>
+                <Grid item xs={6} key={question.id} height="100%">
+                  <MyQuestion question={question.question} questionId={question.id} ></MyQuestion>
                 </Grid>
               )
             })}
           </Grid>
-          <Grid container item alignContent='center' justify='center' xs={12}>
+          <Grid container item alignContent='center' justify='center' xs={12} 
+              className={classes.buttonStyle}>
             {/* <Button
               color='primary'
               variant='outlined'
@@ -80,14 +106,11 @@ export default function MyRoutine(props) {
             >
               Do Routine
             </Button> */}
-            <ButtonBase
-              value={props.routineid}
-              name='routineBtn'
-              onClick={doRoutine}
-              className={classes.buttonStyle}
+            <MyButtonGroup
+              handleClick={handleRoutineButtonClick}
+              routineid={props.routineid}
             >
-              Do Routine
-            </ButtonBase>
+            </MyButtonGroup>
           </Grid>
         </Collapse>
       </Grid>
