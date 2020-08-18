@@ -2,8 +2,6 @@ package com.revature.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -21,11 +19,10 @@ public class AnswerModel {
 
     private String answer;
 
-    // Hmmmm
+    // Question
     @JsonIgnoreProperties({"answer"})
     @ManyToOne
     @JoinColumn(name = "question_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private QuestionModel question;
 
     @Column(name = "post_date", nullable = false)

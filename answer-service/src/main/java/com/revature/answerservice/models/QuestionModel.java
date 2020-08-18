@@ -24,6 +24,6 @@ public class QuestionModel {
 
     // DIRTY
     @JsonIgnoreProperties({"answer", "question", "date"})
-    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "question", orphanRemoval = true)
     private List<AnswerModel> answer;
 }

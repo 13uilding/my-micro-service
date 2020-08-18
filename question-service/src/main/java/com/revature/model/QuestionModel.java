@@ -1,8 +1,10 @@
 package com.revature.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "questions", schema = "msa_example")
@@ -16,8 +18,13 @@ public class QuestionModel {
 
     private String question;
 
-    // DIRTY
-//    @JsonIgnoreProperties({"answer", "question", "date"})
-//    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
-//    private List<AnswerModel> answer;
+    // Routines
+    @JsonIgnoreProperties({"questions"})
+    @ManyToMany(mappedBy = "questions", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    List<RoutineModel> routines;
+
+    // Answers
+    @JsonIgnoreProperties({"answer", "question", "date"})
+    @OneToMany(mappedBy = "question", orphanRemoval = true)
+    private List<AnswerModel> answer;
 }

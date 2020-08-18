@@ -36,9 +36,9 @@ export default function RoutinePage() {
     // Adjust the scroll bar later
     <div className="myPage" id="routinePage">
       <Grid container alignContent='center' justify='flex-end' className={classes.root} wrap='wrap'>
-        <MyRoutine routineId='1' questions={questions.filter((question) => question.id <= 5)}></MyRoutine>
-        <MyRoutine routineId='2' questions={questions.filter((question) => question.id > 5 && question.id < 11)}></MyRoutine>
-        <MyRoutine routineId='3' questions={questions.filter((question) => question.id > 13)}></MyRoutine>
+        <MyRoutine routineName='Morning' routineid={1} questions={questions.filter((question) => question.id <= 5)}></MyRoutine>
+        <MyRoutine routineName='Evening' routineid={2} questions={questions.filter((question) => question.id > 5 && question.id < 11)}></MyRoutine>
+        <MyRoutine routineName='Night' routineid={3} questions={questions.filter((question) => question.id > 13)}></MyRoutine>
       </Grid>
     </div>
   )
